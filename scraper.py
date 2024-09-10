@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright, Playwright
 from bs4 import BeautifulSoup
+import json
 
 def scrape_scores():
       with sync_playwright() as p:
@@ -8,7 +9,8 @@ def scrape_scores():
              page.goto("https://www.espn.com/college-football/scoreboard/_/week/1/year/2024/seasontype/2")
              html_content = page.content()
              soup = BeautifulSoup(html_content, "html.parser")
-             print(soup.prettify())
+             print(soup.find('h1').get_text())
+             
              browser.close()
           
           
