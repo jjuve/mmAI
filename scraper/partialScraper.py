@@ -20,9 +20,9 @@ class ESPNscraper:
               scores = soup.find_all('div', class_='ScoreCell__Score')
 
               team_names = [team.get_text() for team in teams]
-              score_values = [score.get_text() for score in scores]
+              team_scores = [score.get_text() for score in scores]
 
-              return team_names, score_values
+              return team_names, team_scores
        
        def close_browser(self):
               if self.browser:
@@ -32,7 +32,7 @@ class ESPNscraper:
 if __name__ == "__main__":
       with sync_playwright() as p:
             scraper = ESPNscraper()
-            scraper.start_browser(headless=True)
+            scraper.start_browser()
             teams, scores= scraper.scrape_scores()
             print(teams, scores)
             scraper.close_browser()
